@@ -33,9 +33,9 @@
   <img src="screenshot/newInbox.png" width="600">
 </p>
 
-## 🎬 Demo Video
+<!-- ## 🎬 Demo Video
 
-[![Watch the demo](https://img.youtube.com/vi/fBoqTYjbP7I/hqdefault.jpg)](https://youtu.be/fBoqTYjbP7I)
+[![Watch the demo](https://img.youtube.com/vi/fBoqTYjbP7I/hqdefault.jpg)](https://youtu.be/fBoqTYjbP7I) -->
 
 
 
@@ -188,28 +188,3 @@ PROJECT-PHP/
 -price
 
 เก็บจำนวนสินค้าใน order
-
-
-## Security Notes ⚠️
-โปรเจกต์นี้มีปัญหาด้านความปลอดภัยที่สำคัญ ตามรายงาน VALIDATION_REPORT.md:
-
-- **SQL Injection Vulnerabilities**: หลีกเลี่ยงการใช้ตัวแปรโดยตรงใน SQL queries
-- **Incorrect File Paths**: ตรวจสอบเส้นทางไฟล์ให้ถูกต้อง
-- **XSS Vulnerabilities**: ตรวจสอบและกรองข้อมูลที่รับมาจากผู้ใช้
-- **Weak Password Hashing**: ใช้ hashing ที่ปลอดภัยเช่น bcrypt
-
-กรุณาอ่าน VALIDATION_REPORT.md สำหรับรายละเอียดและการแก้ไข
-
-## Installation
-1. Clone หรือ Download โปรเจกต์
-2. วางในโฟลเดอร์ htdocs
-3. สร้างฐานข้อมูล
-4. ตั้งค่าไฟล์ config/data.php
-
-## Usage
-เข้าใช้งานผ่าน  
-http://localhost/project-php/auth/login.php
-
-## Author
-Jarus (Bonus)
-Junior Web Developer
