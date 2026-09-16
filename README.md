@@ -18,19 +18,19 @@
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshot/login-img.png" width="600">
+  <img src="screenshot/newLogin.png" width="600">
 </p>
 
 <p align="center">
-  <img src="screenshot/homepage-img.png" width="600">
+  <img src="screenshot/newHomepage.png" width="600">
 </p>
 
 <p align="center">
-  <img src="screenshot/cart-img.png" width="600">
+  <img src="screenshot/newCart.png" width="600">
 </p>
 
 <p align="center">
-  <img src="screenshot/addmin-img.png" width="600">
+  <img src="screenshot/newInbox.png" width="600">
 </p>
 
 ## 🎬 Demo Video

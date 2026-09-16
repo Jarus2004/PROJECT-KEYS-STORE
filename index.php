@@ -170,6 +170,19 @@ if (!isset($_SESSION['user_login']) && !isset($_SESSION['admin_login'])) {
         .member .col, .imggift .col { padding: 10px; }
         .member img, .imggift img { border-radius: 14px; border: 1px solid rgba(148,163,184,.18); }
         footer { margin-top: 80px; border-top: 1px solid rgba(148,163,184,.18); color: var(--muted); background: #0b1424 !important; }
+        .inbox-modal { overflow: hidden; color: var(--paper); border: 1px solid rgba(56,189,248,.35); border-radius: 16px; background: rgba(15,23,42,.96); box-shadow: 0 24px 70px rgba(0,0,0,.45); }
+        .inbox-modal .modal-header { border-bottom-color: #334155; background: linear-gradient(135deg, rgba(6,182,212,.16), rgba(15,23,42,.4)); }
+        .inbox-modal .modal-title { color: var(--paper); font: 700 1.25rem 'Space Grotesk', sans-serif; }
+        .inbox-modal .modal-body { max-height: min(60vh, 520px); overflow-y: auto; }
+        .inbox-modal .inbox-item { padding: 14px 0; margin: 0; color: #cbd5e1; border-bottom: 1px solid rgba(148,163,184,.18) !important; }
+        .inbox-modal .inbox-item:last-child { border-bottom: 0 !important; }
+        .inbox-modal .inbox-item strong { color: var(--ice); }
+        .inbox-modal .inbox-item small { color: var(--muted); }
+        .inbox-modal .inbox-empty { color: var(--muted); }
+        .inbox-modal .modal-footer { border-top-color: #334155; }
+        .inbox-modal .btn-close { filter: invert(1) grayscale(1); }
+        .inbox-modal .btn-outline-warning { border-color: var(--cyan); color: var(--ice); }
+        .inbox-modal .btn-outline-warning:hover { background: var(--cyan); color: #06202b; }
         @media (max-width: 767px) { .back .d-flex { gap: 12px; } .back .text-warning { font-size: .9rem !important; } }
     </style>
 </head>
@@ -210,7 +223,7 @@ if (!isset($_SESSION['user_login']) && !isset($_SESSION['admin_login'])) {
     <!-- //modal -->
     <div class="modal fade" id="modal-inbox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content bg-black-rgb text-warning border-warning font-thai">
+    <div class="modal-content inbox-modal">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">กล่องจดหมาย</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -229,15 +242,15 @@ $inbox = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         if ($inbox) {
             foreach ($inbox as $item) { ?>
-            <p class="border-bottom pb-2 mb-2 fs-5">
-            🎮 <strong>สินค้า:</strong> <?= htmlspecialchars($item['name_games']) ?><br>
-            🔑 <strong>Key:</strong> <?= htmlspecialchars($item['game_key']) ?><br>
+            <p class="inbox-item fs-5">
+            <i class="bi bi-controller me-1"></i> <strong>สินค้า:</strong> <?= htmlspecialchars($item['name_games']) ?><br>
+            <i class="bi bi-key me-1"></i> <strong>Key:</strong> <?= htmlspecialchars($item['game_key']) ?><br>
             🕒 <small><?= $item['created_at'] ?></small>
             
         </p>
         <?php }?>
         <?php }else {
-            echo "<p class=\"text-center fs-4\">ไม่มีข้อความ</p>";
+            echo "<p class=\"inbox-empty text-center fs-5 py-4\">ไม่มีข้อความ</p>";
         }
         ?>
       </div>
