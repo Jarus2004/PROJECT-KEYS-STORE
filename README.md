@@ -10,10 +10,7 @@
 - [Technologies](#technologies)
 - [Project Structure](#project-structure)
 - [Database Structure](#database-structure)
-- [Security Notes](#security-notes)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Author](#author)
+
 
 ## 📸 Screenshots
 
