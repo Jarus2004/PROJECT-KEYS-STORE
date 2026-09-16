@@ -8,9 +8,22 @@ require_once '../config/data.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .product-page { color: #f8fafc; background: #07111f; }
+        .product-page h1 { font: 700 2rem 'Space Grotesk', sans-serif; }
+        .product-table-wrap { overflow-x: auto; border: 1px solid rgba(148,163,184,.18); border-radius: 14px; background: rgba(15,23,42,.82); }
+        .product-table { min-width: 700px; margin: 0; color: #f8fafc; }
+        .product-table thead { color: #38bdf8; background: #1e293b; }
+        .product-table th, .product-table td { padding: 15px; border-color: #334155; vertical-align: middle; }
+        .product-table tbody tr:hover { background: rgba(6,182,212,.06); }
+        .add-product-btn { border: 0; border-radius: 9px; background: #06b6d4; color: #06202b; font-weight: 700; }
+        .add-product-btn:hover { background: #38bdf8; color: #06202b; }
+        .modal-content { color: #f8fafc; border: 1px solid #334155; background: #0f172a; }
+        .modal-content .form-control { color: #f8fafc; border-color: #334155; background: #1e293b; }
+    </style>
 </head>
 
-<body>
+<body class="product-page">
     <div class="modal fade" id="gameModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -71,11 +84,12 @@ require_once '../config/data.php';
                 <h1>ตารางสินค้า</h1>
             </div>
             <div class="col-md-6 d-flex justify-content-end p-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#gameModal">เพิ่มสินค้า</button>
+                <button type="button" class="btn add-product-btn" data-bs-toggle="modal" data-bs-target="#gameModal"><i class="bi bi-plus-lg me-1"></i>เพิ่มสินค้า</button>
             </div>
         </div>
-        <table class="table">
-            <thead style="position: sticky; top: 0; background-color: #fff; z-index: 10;">
+        <div class="product-table-wrap">
+        <table class="table product-table">
+            <thead style="position: sticky; top: 0; z-index: 2;">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
@@ -110,6 +124,7 @@ require_once '../config/data.php';
                 ?>
             </tbody>
         </table>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script>

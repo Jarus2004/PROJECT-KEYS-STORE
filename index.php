@@ -1,8 +1,9 @@
 <?php
 require_once 'config/data.php';
 session_start();
-if (!isset($_SESSION['user_login'])) {
-    header("Location: ../auth/login.php");
+if (!isset($_SESSION['user_login']) && !isset($_SESSION['admin_login'])) {
+    header("Location: auth/login.php");
+    exit();
 }
 ?>
 
@@ -26,7 +27,7 @@ if (!isset($_SESSION['user_login'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jarus SHOP</title>
+    <title>KEY-GAMES | Digital Marketplace</title>
     <style>
         .bigfront {
             font-size: 2rem;
@@ -131,13 +132,57 @@ if (!isset($_SESSION['user_login'])) {
                 margin: 0 1rem 1rem 1rem;
             }
         }
+
+        :root { --navy: #0f172a; --slate: #1e293b; --cyan: #06b6d4; --ice: #38bdf8; --paper: #f8fafc; --muted: #94a3b8; }
+        * { box-sizing: border-box; }
+        body { color: var(--paper) !important; background: #07111f; font-family: 'Kanit', sans-serif; }
+        .bg-black-rgb { background: radial-gradient(circle at 80% 8%, rgba(6,182,212,.16), transparent 28%), #07111f; }
+        .back { z-index: 10; margin: 0 !important; padding: 18px max(24px, 5vw) !important; border-bottom: 1px solid rgba(148,163,184,.18); background: rgba(7,17,31,.86); backdrop-filter: blur(18px); }
+        .back .fs-4 { color: var(--paper); font: 700 1.25rem 'Space Grotesk', sans-serif; letter-spacing: .02em; }
+        .back .fs-4::before { content: 'KEY-'; color: var(--cyan); }
+        .back .fs-4 { font-size: 0 !important; }
+        .back .fs-4::after { content: 'GAMES'; color: var(--paper); font-size: 1.25rem; }
+        .back .text-warning { color: #cbd5e1 !important; font-size: 1rem !important; transition: color .2s ease; }
+        .back .text-warning:hover { color: var(--ice) !important; }
+        .welcome-title { margin: 40px auto 16px; color: var(--paper); font: 700 clamp(2rem, 5vw, 4.5rem)/1 'Space Grotesk', sans-serif; letter-spacing: 0; }
+        .welcome-title::first-line { color: var(--ice); }
+        .container-xl { max-width: 1280px; }
+        .bigfront { color: var(--paper); font: 700 clamp(1.7rem, 3vw, 2.5rem) 'Space Grotesk', sans-serif; letter-spacing: 0; }
+        .navbar { padding: 0; }
+        .navbar form { width: min(460px, 100%); }
+        .navbar .form-control { border: 1px solid #334155; border-radius: 10px; color: var(--paper); background: rgba(30,41,59,.8); }
+        .navbar .form-control::placeholder { color: var(--muted); }
+        .navbar .btn-outline-success { border-color: var(--cyan); color: var(--cyan); border-radius: 10px; }
+        .navbar .btn-outline-success:hover { background: var(--cyan); color: #06202b; }
+        .game-card { overflow: hidden; padding: 10px !important; border: 1px solid rgba(148,163,184,.18); border-radius: 14px !important; background: rgba(15,23,42,.82) !important; box-shadow: 0 14px 34px rgba(0,0,0,.18); transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+        .game-card:hover { transform: translateY(-7px); border-color: rgba(56,189,248,.65); box-shadow: 0 18px 38px rgba(6,182,212,.16); }
+        .game-card img { border-radius: 9px !important; }
+        .game-card h4, .game-card h5 { color: var(--paper) !important; }
+        .game-card h4 { font-weight: 600; }
+        .game-card h5 { color: var(--muted) !important; }
+        .game-card h5:first-of-type { color: var(--ice) !important; font-size: 1.1rem !important; }
+        .game-card hr { border-color: #334155; }
+        .game-card .btn-success { width: 100%; border: 0; border-radius: 9px; background: var(--cyan); color: #06202b; font-weight: 700; }
+        .game-card .btn-success:hover { background: var(--ice); }
+        .game-card .btn-secondary { width: 100%; border-radius: 9px; }
+        .pagination .page-link { color: var(--ice); border-color: #334155; background: var(--slate); }
+        .pagination .active .page-link { border-color: var(--cyan); background: var(--cyan); color: #06202b; }
+        .member .col, .imggift .col { padding: 10px; }
+        .member img, .imggift img { border-radius: 14px; border: 1px solid rgba(148,163,184,.18); }
+        footer { margin-top: 80px; border-top: 1px solid rgba(148,163,184,.18); color: var(--muted); background: #0b1424 !important; }
+        @media (max-width: 767px) { .back .d-flex { gap: 12px; } .back .text-warning { font-size: .9rem !important; } }
     </style>
 </head>
 
-<body class="bg-black-rgb text-warning font-thai">
+<body class="bg-black-rgb font-thai">
     <?php
-    if (isset($_SESSION['user_login'])) {
+    if (isset($_SESSION['admin_login'])) {
+        $user_id = $_SESSION['admin_login'];
+    } elseif (isset($_SESSION['user_login'])) {
         $user_id = $_SESSION['user_login'];
+    }
+
+    if (isset($user_id)) {
         $stmt = $conn->prepare("SELECT * FROM bob WHERE id = ?");
         $stmt->execute([$user_id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -146,9 +191,12 @@ if (!isset($_SESSION['user_login'])) {
     <div class="container-fluid back p-3 mb-5 position-sticky top-0">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="fs-4 fw-bold mb-2 mb-md-0">
-                ยินดีต้อนรับ, <?php echo $row['username']; ?>
+                ยินดีต้อนรับ, <?php echo htmlspecialchars($row['username'] ?? 'ผู้ใช้งาน'); ?>
             </div>
             <div class="d-flex flex-column flex-md-row gap-2 gap-md-4">
+                <?php if (isset($_SESSION['admin_login'])) { ?>
+                    <a href="admin/admin_page.php?page=dashboard" class="text-decoration-none text-warning"><i class="bi bi-speedometer2"></i> กลับหน้า Admin</a>
+                <?php } ?>
                 <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-inbox">
                     กล่องจดหมาย<i class="bi bi-backpack"></i>
                 </button>

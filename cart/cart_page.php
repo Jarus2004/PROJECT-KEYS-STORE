@@ -47,40 +47,57 @@ if (isset($_GET['delete'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตะกร้าสินค้า</title>
+    <title>ตะกร้าสินค้า | KEY-GAMES</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        .bg-rgb {
-            background: #000000;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #434343, #000000);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #434343, #000000);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-        }
+        :root { --navy: #0f172a; --slate: #1e293b; --cyan: #06b6d4; --ice: #38bdf8; --paper: #f8fafc; --muted: #94a3b8; }
+        * { box-sizing: border-box; }
+        body { min-height: 100vh; color: var(--paper); font-family: 'Kanit', sans-serif; background: radial-gradient(circle at 80% 0%, rgba(6,182,212,.14), transparent 30%), #07111f; }
+        .cart-header { border: 1px solid rgba(56,189,248,.24); border-radius: 18px; background: rgba(15,23,42,.8) !important; box-shadow: 0 18px 50px rgba(0,0,0,.25); }
+        .cart-header h1 { font: 700 clamp(2rem, 4vw, 3.5rem) 'Space Grotesk', sans-serif; }
+        .cart-header h1 span { color: var(--ice); }
+        .cart-header a { color: var(--muted) !important; }
+        .cart-header a:hover { color: var(--ice) !important; }
+        .cart-table-wrap { overflow-x: auto; border: 1px solid rgba(148,163,184,.18); border-radius: 14px; background: rgba(15,23,42,.82); }
+        .cart-table { min-width: 700px; margin: 0; color: var(--paper); }
+        .cart-table thead { color: var(--ice); background: rgba(30,41,59,.8); }
+        .cart-table th { padding: 18px 14px; border-color: #334155; font-weight: 500; white-space: nowrap; }
+        .cart-table td { padding: 16px 14px; border-color: #263449; vertical-align: middle; }
+        .cart-table tbody tr:hover { background: rgba(6,182,212,.06); }
+        .cart-table .form-control { width: 85px; border: 1px solid #334155; color: var(--paper); background: var(--slate); }
+        .btn-update { border: 1px solid rgba(56,189,248,.55); color: var(--ice); }
+        .btn-update:hover { background: var(--ice); color: #06202b; }
+        .checkout-btn { border: 0; border-radius: 10px; background: var(--cyan); color: #06202b; font-weight: 700; }
+        .checkout-btn:hover { background: var(--ice); color: #06202b; }
+        .empty-cart { color: var(--muted); padding: 48px !important; }
+        @media (max-width: 576px) { .cart-header { margin-top: 18px !important; } .cart-table-wrap { margin: 0 -4px; } }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-rgb">
+<body>
 
-    <div class="container bg-primary text-white text-center p-3 mt-5">
-        <h1>Shopping Cart</h1>
+    <header class="container cart-header text-center p-4 mt-5">
+        <div class="text-uppercase text-info small fw-bold" style="letter-spacing: .16em;">KEY-GAMES / YOUR PICKS</div>
+        <h1 class="mt-2 mb-2">Shopping <span>Cart</span></h1>
         <a href="../index.php" class="text-dark text-decoration-none">กลับไปหน้าหลัก</a>
-    </div>
+    </header>
         
-    <div class="container mt-5">
+        <div class="cart-table-wrap">
+        <table class="table cart-table text-center">
         <?php if(isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger text-center">
+                    <td colspan='6' class='text-center empty-cart'>
                 <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-            </div>
+                                    <button type="submit" name="update_qty" class="btn btn-sm btn-update">
         <?php endif; ?>
-        <table class="table table-bordered text-center" style="background-color: rgba(255,255,255,0.4);">
+        </table>
+        </div>
             <thead>
-                <tr>
+            <a href="orders.php?user_order=<?= $user_id ?>" class="btn checkout-btn text-center d-block mt-4 py-3">ดำเนินการชำระเงิน <i class="bi bi-arrow-right"></i></a>
                     <th>แก้ไขจำนวน</th>
                     <th>สินค้า</th>
                     <th>จำนวน</th>

@@ -1,8 +1,8 @@
 <?php
-require_once '../config/data.php';
+require_once __DIR__ . '/../config/data.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -10,9 +10,22 @@ require_once '../config/data.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USER</title>
+    <style>
+        .user-page { color: #f8fafc; background: #07111f; }
+        .user-page h1 { font: 700 clamp(1.6rem, 4vw, 2.2rem) 'Space Grotesk', sans-serif; }
+        .user-table-wrap { max-height: 1200px; overflow: auto; border: 1px solid rgba(148,163,184,.18); border-radius: 14px; background: rgba(15,23,42,.82); }
+        .user-table { min-width: 700px; margin: 0; color: #f8fafc; }
+        .user-table thead { position: sticky; top: 0; z-index: 2; color: #38bdf8; background: #1e293b; }
+        .user-table th, .user-table td { padding: 14px; border-color: #334155; vertical-align: middle; }
+        .user-table tbody tr:hover { background: rgba(6,182,212,.06); }
+        .user-page .modal-content { color: #f8fafc; border-color: #334155; background: #0f172a; }
+        .user-page .form-control { color: #f8fafc; border-color: #334155; background: #1e293b; }
+        .user-page .form-control:focus { color: #f8fafc; border-color: #06b6d4; background: #1e293b; }
+        @media (max-width: 575.98px) { .user-page .container { margin-top: 1rem !important; } }
+    </style>
 </head>
 
-<body>
+<body class="user-page">
 
     <!-- edit_key -->
     <div class="modal fade" id="editUserModal" tabindex="-1">
@@ -33,17 +46,17 @@ require_once '../config/data.php';
 
                         <div class="mb-3">
                             <label>Username</label>
-                            <input type="text" class="form-control" name="username" id="modal_username" value="<?= $user['username'] ?>">
+                            <input type="text" class="form-control" name="username" id="modal_username" value="">
                         </div>
 
                         <div class="mb-3">
                             <label>Email</label>
-                            <input type="text" class="form-control" name="email" id="modal_email" value="<?= $user['email'] ?>">
+                            <input type="text" class="form-control" name="email" id="modal_email" value="">
                         </div>
 
                         <div class="mb-3">
                             <label>User Role</label>
-                            <input type="text" class="form-control" name="user_role" id="modal_role" value="<?= $user['user_role'] ?>">
+                            <input type="text" class="form-control" name="user_role" id="modal_role" value="">
                         </div>
 
                     </div>
@@ -65,7 +78,7 @@ require_once '../config/data.php';
 
 
 
-    <div class="container mt-5" style="max-height: 1200px; overflow-y: auto;">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
                 <h1>USERS</h1>
@@ -91,7 +104,8 @@ require_once '../config/data.php';
 
         <!-- แสดงรายการusers -->
 
-        <table class="table">
+        <div class="user-table-wrap">
+        <table class="table user-table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -108,15 +122,15 @@ require_once '../config/data.php';
                 $users = $stmt->fetchAll();
 
                 if (!$users) {
-                    echo "<p><td colspan='4' class='text-center'>ไม่มีผู้ใช้ในระบบ</td></p>";
+                    echo "<tr><td colspan='5' class='text-center py-4'>ไม่มีผู้ใช้ในระบบ</td></tr>";
                 } else {
                     foreach ($users as $user) {
                 ?>
                         <tr>
-                            <th scope="row"><?php echo $user['id']; ?></th>
-                            <td><?= $user['username'] ?></td>
-                            <td><?= $user['email'] ?></td>
-                            <td><?= $user['user_role'] ?></td>
+                            <th scope="row"><?= (int)$user['id'] ?></th>
+                            <td><?= htmlspecialchars($user['username']) ?></td>
+                            <td><?= htmlspecialchars($user['email']) ?></td>
+                            <td><?= htmlspecialchars($user['user_role']) ?></td>
                             <td>
                                 <button type="button"
                                     class="btn btn-warning"
@@ -139,6 +153,7 @@ require_once '../config/data.php';
                 ?>
             </tbody>
         </table>
+        </div>
 
     </div>
     <script>
