@@ -13,7 +13,7 @@
 
 
 ## 📸 Screenshots
-### Client
+- Client
 <p align="center">
   <img src="screenshot/newLogin.png" width="600">
 </p>
@@ -34,7 +34,7 @@
   <img src="screenshot/newInbox.png" width="600">
 </p>
 
-### Admin
+- Admin
 <p align="center">
   <img src="screenshot/adminDashboard.png" width="600">
 </p>
@@ -42,16 +42,14 @@
 <p align="center">
   <img src="screenshot/adminInsertgames.png" width="600">
 </p>
+
 <p align="center">
   <img src="screenshot/adminKeygames.png" width="600">
 </p>
+
 <p align="center">
   <img src="screenshot/adminOrder.png" width="600">
 </p>
-<!-- ## 🎬 Demo Video
-
-[![Watch the demo](https://img.youtube.com/vi/fBoqTYjbP7I/hqdefault.jpg)](https://youtu.be/fBoqTYjbP7I) -->
-
 
 
 ## Features
