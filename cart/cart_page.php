@@ -153,7 +153,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <?php if (!empty($cart_items)): ?>
-            <a href="orders.php?user_order=<?= (int)$user_id ?>" class="btn checkout-btn text-center d-block mt-4 py-3">ดำเนินการชำระเงิน <i class="bi bi-arrow-right"></i></a>
+            <a href="orders.php" class="btn checkout-btn text-center d-block mt-4 py-3">ดำเนินการชำระเงิน <i class="bi bi-arrow-right"></i></a>
         <?php endif; ?>
     </main>
 </body>

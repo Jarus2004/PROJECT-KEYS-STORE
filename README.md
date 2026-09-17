@@ -13,7 +13,7 @@
 
 
 ## 📸 Screenshots
-
+### Client
 <p align="center">
   <img src="screenshot/newLogin.png" width="600">
 </p>
@@ -27,9 +27,27 @@
 </p>
 
 <p align="center">
+  <img src="screenshot/userPayment.png" width="600">
+</p>
+
+<p align="center">
   <img src="screenshot/newInbox.png" width="600">
 </p>
 
+### Admin
+<p align="center">
+  <img src="screenshot/adminDashboard.png" width="600">
+</p>
+
+<p align="center">
+  <img src="screenshot/adminInsertgames.png" width="600">
+</p>
+<p align="center">
+  <img src="screenshot/adminKeygames.png" width="600">
+</p>
+<p align="center">
+  <img src="screenshot/adminOrder.png" width="600">
+</p>
 <!-- ## 🎬 Demo Video
 
 [![Watch the demo](https://img.youtube.com/vi/fBoqTYjbP7I/hqdefault.jpg)](https://youtu.be/fBoqTYjbP7I) -->
@@ -39,6 +57,7 @@
 ## Features
 - สมัครสมาชิก / เข้าสู่ระบบ
 - ระบบตะกร้าสินค้า
+- ชำระเงินด้วย PromptPay QR และตรวจสอบสลิปอัตโนมัติ
 - ระบบแอดมิน
 - CRUD ข้อมูล
 - เพิ่มKEYSเกมส์
@@ -49,6 +68,17 @@
 - HTML / CSS
 - Bootstrap 5
 - JavaScript
+
+## Payment setup
+
+การชำระเงินใช้ Thunder Solution API โดยต้องเปิดใช้งาน PHP extensions `curl` และ `fileinfo` แล้วตั้งค่า environment variables ก่อนเปิด Apache:
+
+```text
+THUNDER_API_KEY=คีย์จาก Thunder Developer Portal
+THUNDER_PROMPTPAY_MSISDN=หมายเลข PromptPay ของร้าน
+```
+
+ต้องผูกบัญชีรับเงินของร้านไว้ใน Thunder Developer Portal เพื่อให้ `matchAccount` ตรวจสอบผู้รับได้ ระบบจะสร้าง QR ตามยอดตะกร้า และจะสร้างออเดอร์/แจก game key ก็ต่อเมื่อ Thunder ยืนยันสลิปซ้ำไม่สำเร็จ ยอดเงินตรง และบัญชีผู้รับตรงกัน
 
 ## Project Structure
 ```
