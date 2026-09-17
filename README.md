@@ -5,7 +5,6 @@
 
 ## Contents
 - [Screenshots](#-screenshots)
-- [Demo Video](#-demo-video)
 - [Features](#features)
 - [Technologies](#technologies)
 - [Project Structure](#project-structure)
